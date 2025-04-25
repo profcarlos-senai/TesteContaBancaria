@@ -21,6 +21,14 @@ public class ContaBancaria {
     }
 
     /**
+     * Permite que os descendentes alterem o saldo
+     * @param valor o novo valor do saldo
+     */
+    final protected void  setSaldo(double valor){
+        this.saldo = valor;
+    }
+
+    /**
      * Deposita um valor na conta
      * @param valor valor em R$ a ser depositado
      * @return o saldo depois do depósito

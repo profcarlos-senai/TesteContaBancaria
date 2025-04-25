@@ -3,7 +3,6 @@ package org.example;
 public class ContaExecutiva extends ContaBancaria {
 
     private double limite;
-    private boolean gambiarra = false;
 
     public ContaExecutiva(double limite){
         super(); // chama o construtor do ancestral
@@ -12,18 +11,14 @@ public class ContaExecutiva extends ContaBancaria {
 
     @Override
     public double sacar(double valor) {
-        try{
-            gambiarra = true; // sacaneia o getSaldo() só por agora
-            return super.sacar(valor);
-        } finally {
-            gambiarra = false; // shhh não conta pra ninguém
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor do saque deve ser positivo.");
         }
-    }
-
-    @Override
-    public double getSaldo() {
-        if (gambiarra) return super.getSaldo()+getLimite();
-        return super.getSaldo();
+        if (valor > getSaldo() + getLimite()) {
+            throw new IllegalArgumentException("Saldo insuficiente para o saque.");
+        }
+        setSaldo(getSaldo() - valor);
+        return getSaldo();
     }
 
     public double getLimite() {
