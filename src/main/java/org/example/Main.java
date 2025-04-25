@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria conta = new ContaExecutiva(1000);
 
         char opcao;
         do {
@@ -21,24 +21,18 @@ public class Main {
 
             try {
                 switch (opcao) {
-                    case 'D':
+                    case 'D' -> {
                         System.out.print("Digite o valor para depositar: R$");
                         double valorDeposito = scanner.nextDouble();
                         conta.depositar(valorDeposito);
-                        break;
-
-                    case 'S':
+                    }
+                    case 'S' -> {
                         System.out.print("Digite o valor para sacar: R$");
                         double valorSaque = scanner.nextDouble();
                         conta.sacar(valorSaque);
-                        break;
-
-                    case 'F':
-                        System.out.println("Fim do programa.");
-                        break;
-
-                    default:
-                        System.out.println("Opção inválida.");
+                    }
+                    case 'F' -> System.out.println("Fim do programa.");
+                    default -> System.out.println("Opção inválida.");
                 }
             } catch (IllegalArgumentException e) {
                 // Captura a exceção e exibe a mensagem
